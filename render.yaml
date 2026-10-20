@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tvara-r3actr-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --workers 1 --threads 4 --timeout 120 --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
+      - key: TVARA_CONFIG_PATH
+        value: model_files/config.json
+      - key: TVARA_TOKENIZER_PATH
+        value: model_files/tvara_tokenizer.json
+      - key: TVARA_MODEL_PATH
+        value: model_files/tvara_r3actr_fp16.pt
